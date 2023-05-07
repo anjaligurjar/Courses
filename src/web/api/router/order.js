@@ -47,9 +47,8 @@ orderRouter.get(
     ]);
     res.send({
       users,
-      orders: Course.procce === 0 ? [{ numOrders: 0, totaldiscount: 0 }] : orders,
-   
-    
+      orders:
+        Course.procce === 0 ? [{ numOrders: 0, totaldiscount: 0 }] : orders,
     });
   })
 );
@@ -90,7 +89,7 @@ orderRouter.post(
     const order = new Course({
       orderItems: req.body.orderItems,
       user: req.user._id,
-    
+
       payment: req.body.payment,
       itemsPrice: req.body.itemsPrice,
       taxPrice: req.body.taxPrice,
@@ -98,7 +97,9 @@ orderRouter.post(
       totalPrice: req.body.totalPrice,
     });
     const createdOrder = await order.save();
-    res.status(201).send({ message: 'New Order Created', course: createdOrder });
+    res
+      .status(201)
+      .send({ message: 'New Order Created', course: createdOrder });
   })
 );
 orderRouter.delete(
@@ -146,7 +147,7 @@ orderRouter.put(
       order.isDelivered = true;
       order.deliveredAt = Date.now();
       const updatedOrder = await order.save();
-      res.send({ message: 'confirmation, order: updatedOrder });
+      res.send({ message: 'confirmation, order: updatedOrder' });
     } else {
       res.status(404).send({ message: 'Order Not Found.' });
     }
@@ -154,4 +155,4 @@ orderRouter.put(
 );
 
 export default orderRouter;
-Footer
+Footer;
